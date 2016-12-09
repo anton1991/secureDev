@@ -34,19 +34,13 @@
             <li class="active"><a href="home.jsp">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
-			<li>
-			<form action="LoginServlet" method="get" style="display:inline;">
-			<button class="btn btn-default" type="submit" style="margin-top:10px; ">login</button>
-			</form>
-			<form action="LoginServlet" method="get" style="display:inline;">
-			<button class="btn btn-default" type="submit" style="margin-top:10px;">sign in</button>
-			</form>
-			</li>
+            <li class="active"><a href="LogInPage.jsp">Login</a></li>
+            <li class="active"><a href="SignUp.jsp">Sign Up</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-    <div id="body" class="container" style="margin: auto;margin-top: 50px;width: 60%;padding: 10px;">
+    <div id="body" class="container" style="margin: auto;margin-top: 50px;padding: 10px;">
       <jsp:doBody/>
     </div>
         <footer class="footer" style="  position: absolute;
