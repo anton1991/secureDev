@@ -30,18 +30,26 @@
 	               	</div>
 	            </div> 
 				<div class="main-login main-center" >
-					<form class="form-horizontal" method="post" style="width:300px; margin:0 auto" action="#">
+					<form class="form-horizontal" action="SignInController" method="post" style="width:300px; margin:0 auto" >
 						
 						<div class="form-group" >
-							<label for="name" class="cols-sm-2 control-label">Your Name</label>
+							<label for="name" class="cols-sm-2 control-label">first Name</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" style="width:200px" name="name" id="name"  placeholder="Enter your Name"/>
+									<input type="text" class="form-control" style="width:200px" name="first_name" id="name"  placeholder="Enter your first Name"/>
 								</div>
 							</div>
 						</div>
-
+						<div class="form-group">
+							<label for="username" class="cols-sm-2 control-label">last name</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" style="width:200px" name="username" id="last_name"  placeholder="Enter your last name"/>
+								</div>
+							</div>
+						</div>
 						<div class="form-group" >
 							<label for="email" class="cols-sm-2 control-label">Your Email</label>
 							<div class="cols-sm-10">
@@ -52,15 +60,7 @@
 							</div>
 						</div>
 
-						<div class="form-group">
-							<label for="username" class="cols-sm-2 control-label">Username</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" style="width:200px" name="username" id="username"  placeholder="Enter your Username"/>
-								</div>
-							</div>
-						</div>
+
 
 						<div class="form-group">
 							<label for="password" class="cols-sm-2 control-label" >Password</label>
@@ -83,11 +83,9 @@
 						</div>
 
 						<div class="form-group ">
-							<button type="button" class="btn btn-primary btn-lg btn-block login-button" style="width:200px">Register</button>
+							<button type=submit class="btn btn-primary btn-lg btn-block login-button" style="width:200px">Register</button>
 						</div>
-						<div class="login-register">
-				            <a href="LogInPage.jsp">Login</a>
-				         </div>
+
 					</form>
 				</div>
 			</div>

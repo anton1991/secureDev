@@ -2,6 +2,7 @@ package module;
 import java.text.*;
 import java.util.*;
 import java.sql.*;
+import java.sql.PreparedStatement;
 import secureDev.ConnectionManager;
 import module.UserBean;
 
@@ -10,34 +11,41 @@ public class UserDAO
    static Connection currentCon = null;
    static ResultSet rs = null;  
 	
+public static Boolean sign_up(UserBean bean)
+{
+	PreparedStatement stmt=null;
 	
-	
-   public static UserBean login(UserBean bean) {
-	
-      //preparing some objects for connection 
-      Statement stmt = null;    
-	
-      String username = bean.getUsername();    
-      String password = bean.getPassword();   
+	try
+	{
+		//connect to DB 
+		currentCon = ConnectionManager.getConnection();
+	    //clear sql injection threat
+	    stmt= currentCon.prepareStatement("select * from users where username=? AND password = ?");
+	    stmt.setString(1, bean.getUsername());
+	    stmt.setString(2, bean.getPassword());
 	    
-      String searchQuery =
-            "select * from users where username='"
-                     + username
-                     + "' AND password='"
-                     + password
-                     + "'";
-	    
-   // "System.out.println" prints in the console; Normally used to trace the process
-   System.out.println("Your user name is " + username);          
-   System.out.println("Your password is " + password);
-   System.out.println("Query: "+searchQuery);
-	    
+	}
+	catch (Exception ex) 
+	{
+		System.out.println("Log In failed: An Exception has occurred! " + ex);
+		return false;
+	}
+	return true;
+}
+	
+public static UserBean login(UserBean bean) {
+	
+      //preparing some objects for connection       
+   PreparedStatement stmt=null;
    try 
    {
       //connect to DB 
       currentCon = ConnectionManager.getConnection();
-      stmt=currentCon.createStatement();
-      rs = stmt.executeQuery(searchQuery);	        
+      //clear sql injection threat
+      stmt= currentCon.prepareStatement("select * from users where username=? AND password = ?");
+      stmt.setString(1, bean.getUsername());
+      stmt.setString(2, bean.getPassword());
+      rs = stmt.executeQuery();	        
       boolean more = rs.next();
 	       
       // if user does not exist set the isValid variable to false

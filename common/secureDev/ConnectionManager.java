@@ -1,7 +1,8 @@
 package secureDev;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 
 public class ConnectionManager {
@@ -14,14 +15,15 @@ public class ConnectionManager {
      
       try
       {
-         String url = "jdbc:odbc:" + "DataSource"; 
+         String url = "jdbc:sqlite:MySQLiteDB" + "DataSource.db"; 
          // assuming "DataSource" is your DataSource name
 
-         Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
+         Class.forName("org.sqlite.JDBC");
          
          try
          {            	
-            con = DriverManager.getConnection(url,"username","password"); 
+        	 //todoo add user name and password to database!!
+            con = DriverManager.getConnection(url); 
              								
          // assuming your SQL Server's	username is "username"               
          // and password is "password"

@@ -29,7 +29,7 @@ public class SignInController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("Served at: fuck").append(request.getContextPath());
 	}
 
 	/**
@@ -43,7 +43,8 @@ public class SignInController extends HttpServlet {
 		user.setLastName(request.getParameter("last_name"));
 	    user.setUserName(request.getParameter("email"));
 	    user.setPassword(request.getParameter("password"));
-		doGet(request, response);
+   	 	request.getRequestDispatcher("LogInPage.jsp").forward(request, response);
+		//doGet(request, response);
 	}
 
 }
