@@ -13,7 +13,7 @@ public class CalendarServlet extends HttpServlet {
         response.setContentType("text/html");  
         PrintWriter out=response.getWriter();  
           
-        request.getRequestDispatcher("index.html").include(request, response);  
+        request.getRequestDispatcher("Calendar.jsp").include(request, response);  
           
         Cookie ck[]=request.getCookies();  
         if(ck!=null){  

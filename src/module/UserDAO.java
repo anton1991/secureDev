@@ -20,7 +20,7 @@ public static Boolean sign_up(UserBean bean)
 		//connect to DB 
 		currentCon = ConnectionManager.getConnection();
 	    //clear sql injection threat
-	    stmt= currentCon.prepareStatement("select * from users where username=? AND password = ?");
+	    stmt= currentCon.prepareStatement("select * from user_auth where EMAIL=? AND PASSWORD = ?;");
 	    stmt.setString(1, bean.getUsername());
 	    stmt.setString(2, bean.getPassword());
 	    
@@ -41,8 +41,11 @@ public static UserBean login(UserBean bean) {
    {
       //connect to DB 
       currentCon = ConnectionManager.getConnection();
+      
       //clear sql injection threat
-      stmt= currentCon.prepareStatement("select * from users where username=? AND password = ?");
+      System.out.println(bean.getUsername() + bean.getPassword());
+      stmt= currentCon.prepareStatement("SELECT * FROM user_auth WHERE EMAIL= ? AND PASSWORD = ?");
+      System.out.println(bean.getUsername() + bean.getPassword());
       stmt.setString(1, bean.getUsername());
       stmt.setString(2, bean.getPassword());
       rs = stmt.executeQuery();	        
@@ -58,8 +61,8 @@ public static UserBean login(UserBean bean) {
       //if user exists set the isValid variable to true
       else if (more) 
       {
-         String firstName = rs.getString("FirstName");
-         String lastName = rs.getString("LastName");
+         String firstName = rs.getString("First_Name");
+         String lastName = rs.getString("Last_Name");
 	     	
          System.out.println("Welcome " + firstName);
          bean.setFirstName(firstName);

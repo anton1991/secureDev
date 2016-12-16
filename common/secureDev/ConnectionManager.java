@@ -1,8 +1,6 @@
 package secureDev;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 
 public class ConnectionManager {
@@ -15,7 +13,7 @@ public class ConnectionManager {
      
       try
       {
-         String url = "jdbc:sqlite:MySQLiteDB" + "DataSource.db"; 
+    	  String url = "jdbc:sqlite:/Users/antong/MySQLiteDB"; 
          // assuming "DataSource" is your DataSource name
 
          Class.forName("org.sqlite.JDBC");
@@ -27,7 +25,6 @@ public class ConnectionManager {
              								
          // assuming your SQL Server's	username is "username"               
          // and password is "password"
-              
          }
          
          catch (SQLException ex)
