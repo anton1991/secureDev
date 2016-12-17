@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Cookie;
 
 import module.UserDAO;
 
@@ -39,8 +40,10 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try
 		{	    
-
+	         HttpSession session = request.getSession(true);	    
 		     UserBean user = new UserBean();
+		     String sessionId = session.getId();
+		     Cookie userCookie = new Cookie("JSESSIONID", sessionId);
 		     user.setUserName(request.getParameter("username"));
 		     user.setPassword(request.getParameter("password"));
 
@@ -48,14 +51,20 @@ public class LoginServlet extends HttpServlet {
 			   		    
 		     if (user.isValid())
 		     {
-			        
-		          HttpSession session = request.getSession(true);	    
-		          session.setAttribute("currentSessionUser",user); 
-		          response.sendRedirect("CalendarServlet"); //logged-in page      		
+					//setting cookie to expiry in 30 mins
+		          session.setAttribute("user_name",user.getFirstName());
+		          session.setAttribute("loged_in", "true");
+		          
+		            
+		            response.addCookie(userCookie);
+		          request.getRequestDispatcher("Home").forward(request, response);
+
 		     }
 			        
 		     else 
 		     {
+		    	 userCookie.setMaxAge(0);
+		    	 response.addCookie(userCookie);
 		    	 request.setAttribute("msg", "fuck you");
 		    	 request.getRequestDispatcher("LogInPage.jsp").forward(request, response);
 		     }

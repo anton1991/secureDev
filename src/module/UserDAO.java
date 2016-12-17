@@ -20,9 +20,12 @@ public static Boolean sign_up(UserBean bean)
 		//connect to DB 
 		currentCon = ConnectionManager.getConnection();
 	    //clear sql injection threat
-	    stmt= currentCon.prepareStatement("select * from user_auth where EMAIL=? AND PASSWORD = ?;");
-	    stmt.setString(1, bean.getUsername());
-	    stmt.setString(2, bean.getPassword());
+	    stmt= currentCon.prepareStatement("INSERT INTO user_auth (FIRST_NAME, LAST_NAME, EMAIL,PASSWORD) VALUES (?,?,?,?);");
+	    stmt.setString(1, bean.getFirstName());
+	    stmt.setString(2, bean.getLastName());
+	    stmt.setString(3, bean.getUsername());
+	    stmt.setString(4, bean.getPassword());
+	    stmt.executeUpdate();	    
 	    
 	}
 	catch (Exception ex) 

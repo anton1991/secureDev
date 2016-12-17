@@ -1,25 +1,26 @@
 package controllers;
 
-import module.UserDAO;
+import javax.servlet.http.Cookie;
+
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import module.UserBean;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class SignInController
+ * Servlet implementation class LogOutServlet
  */
-@WebServlet("/SignInController")
-public class SignInController extends HttpServlet {
+@WebServlet("/LogOutServlet")
+public class LogOutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SignInController() {
+    public LogOutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,7 +30,14 @@ public class SignInController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.sendRedirect("SignUp.jsp");
+		HttpSession session = request.getSession(false);
+		if (session != null)
+		{
+			String sessionId = session.getId();
+			session.setAttribute("loged_in", "false");
+		}
+		request.getRequestDispatcher("Home").forward(request, response);
+		response.sendRedirect("Home");
 	}
 
 	/**
@@ -37,16 +45,7 @@ public class SignInController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		UserBean new_user = new UserBean();
-		
-		
-		new_user.setFirstName(request.getParameter("first_name"));
-		new_user.setLastName(request.getParameter("last_name"));
-	    new_user.setUserName(request.getParameter("email"));
-	    new_user.setPassword(request.getParameter("password"));
-   	 	UserDAO.sign_up(new_user);
-   	 	request.getRequestDispatcher("/WEB-INF/LogInPage.jsp").forward(request, response);
-
+		doGet(request, response);
 	}
 
 }

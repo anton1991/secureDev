@@ -25,8 +25,6 @@
 			<div class="row main">
 				<div class="panel-heading">
 	               <div class="panel-title text-center">
-	               		<h1 class="title">My Barber</h1>
-	               		<hr />
 	               	</div>
 	            </div> 
 				<div class="main-login main-center" >
@@ -46,7 +44,7 @@
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" style="width:200px" name="username" id="last_name"  placeholder="Enter your last name"/>
+									<input type="text" class="form-control" style="width:200px" name="last_name" id="last_name"  placeholder="Enter your last name"/>
 								</div>
 							</div>
 						</div>
