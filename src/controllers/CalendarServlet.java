@@ -15,6 +15,7 @@ public class CalendarServlet extends HttpServlet {
         HttpSession session = request.getSession(false);	   
         if(session  !=null && session.getAttribute("loged_in").equals("true"))
         {
+        	request.setAttribute("user_loged_in", "anton");
         	request.getRequestDispatcher("/WEB-INF/Calendar.jsp").include(request, response); 
         }
         else
