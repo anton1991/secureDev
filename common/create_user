@@ -4,3 +4,16 @@ CREATE TABLE user_auth(
    LAST_NAME           TEXT    NOT NULL,
    EMAIL           TEXT    NOT NULL,
    PASSWORD           TEXT    NOT NULL);
+   
+CREATE TABLE appointment(
+   id integer primary key autoincrement NOT NULL,
+   FIRST_NAME           TEXT    NOT NULL,
+   LAST_NAME           TEXT    NOT NULL,
+   EMAIL           TEXT    NOT NULL,
+   MESSAGE           TEXT    NOT NULL,
+   REGARDING           TEXT    NOT NULL,
+   MONTH           TEXT    NOT NULL,
+   DAY           TEXT    NOT NULL,
+   TIME           TEXT    NOT NULL,
+   PHONE           TEXT    NOT NULL,
+   OWNER           TEXT    NOT NULL);
