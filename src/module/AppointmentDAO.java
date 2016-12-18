@@ -42,5 +42,47 @@ public class AppointmentDAO {
 		}
 		return true;
 	}
+	public static AppointmentBean get_appointment_regular(String Owner)
+	{
+		PreparedStatement stmt=null;
+		AppointmentBean bean = new AppointmentBean();
+		try
+		{
+				//connect to DB 
+				currentCon = ConnectionManager.getConnection();
+			    //clear sql injection threat
+				if (Owner == "the_king")
+				{
+					stmt= currentCon.prepareStatement("select FIRST_NAME, LAST_NAME, EMAIL,MESSAGE,REGARDING,MONTH,DAY,TIME,PHONE from appointment where  OWNER = ?;");
+					stmt.setString(0, bean.getOwner());
+				}
+				else
+				{
+					stmt= currentCon.prepareStatement("select FIRST_NAME, LAST_NAME, EMAIL,MESSAGE,REGARDING,MONTH,DAY,TIME,PHONE from appointment");
+				}
+			    rs = stmt.executeQuery();	
+			    while ( rs.next() )
+			    {
+			    	
+			    	bean.setFirstName(rs.getString("FIRST_NAME"));
+			    	bean.setLastName(rs.getString("LAST_NAME"));
+			    	bean.setEmail(rs.getString("EMAIL"));
+			    	bean.setDay(rs.getString("DAY"));
+			    	bean.setMonth(rs.getString("MONTH"));
+			    	bean.setTime(rs.getString("TIME"));
+			    	bean.setPhone(rs.getString("PHONE"));
+			    	bean.setRegarding(rs.getString("REGARDING"));
+			    	bean.setOWNER(Owner);
+			    	bean.setMessage(rs.getString("MESSAGE"));
+			    }
+			    return bean;
+		}
+		catch (Exception ex) 
+		{
+			System.out.println("Log In failed: An Exception has occurred! " + ex);
+			return null;
+		}
+	}
+	
 
 }

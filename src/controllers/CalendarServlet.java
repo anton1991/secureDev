@@ -54,5 +54,11 @@ public class CalendarServlet extends HttpServlet {
 				System.out.println("Log In failesd: An Exception has occurred! " + ex);
 			}
 		}
+		else
+		{
+			response.sendRedirect("LogIn");
+		}
+		response.sendRedirect("Home");
+		
 	}
 }  

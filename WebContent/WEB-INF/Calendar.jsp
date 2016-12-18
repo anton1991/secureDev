@@ -29,7 +29,7 @@
         <div class="row">
             <div class="span2">
                 <label class="" >First Name</label>
-                <input type="text" name = "firs_name" class="span2" placeholder="">
+                <input type="text" name = "first_name" class="span2" placeholder="">
                 <label class="" >Last Name</label>
                 <input type="text" name = "last_name" class="span2" placeholder="">
                 <label class="" >Phone</label>
