@@ -10,6 +10,7 @@ public class AppointmentBean {
       private String day;
       private String time;
       private String message;
+      private String owner;
 	
 	
       public String getFirstName() {
@@ -83,6 +84,13 @@ public class AppointmentBean {
            public void setTime(String new_Time) {
           	 time = new_Time;
            }
+           public String getOwner() {
+               return owner;
+      	}
+
+            public void setOWNER(String new_Owner) {
+            	owner = new_Owner;
+            }
   
    	
        

@@ -24,19 +24,19 @@
  
 
 <div class="container">
-    <form class="well span7">
+    <form class="well span7" action="Calendar" method="post">
         <legend class="text-center" style="color: #fff"><img src="http://i.imgur.com/0KyKwkh.png"> Make an Appointment</legend>
         <div class="row">
             <div class="span2">
-                <label class="">First Name</label>
-                <input type="text" class="span2" placeholder="">
-                <label class="">Last Name</label>
-                <input type="text" class="span2" placeholder="">
-                <label class="">Phone</label>
-                <input type="text" class="span2" placeholder="">
-                <label class="">Email</label>
-                <input type="text" class="span2" placeholder="">
-                <select id="subject" name="subject" class="span2">
+                <label class="" >First Name</label>
+                <input type="text" name = "firs_name" class="span2" placeholder="">
+                <label class="" >Last Name</label>
+                <input type="text" name = "last_name" class="span2" placeholder="">
+                <label class="" >Phone</label>
+                <input type="text" name = "phone" class="span2" placeholder="">
+                <label class="" >Email</label>
+                <input type="text" name= "email" class="span2" placeholder="">
+                <select id="subject" name="regarding" class="span2">
                     <option value="na" selected="" class="">Visit regarding...</option>
                     <option value="MySon" class="">My son</option>
                     <option value="MyDaughter" class="">My Daughter</option>
@@ -52,7 +52,7 @@
                 <p class="">First Choice Date &amp; Time</p>
                 <div class="btn-toolbar" style="margin: 0;">
                     <div class="btn-group">
-                        <select class="">
+                        <select class="" name = "month">
                             <option value="Month" class="">- Month -</option>
                             <option value="January" class="">January</option>
                             <option value="February" class="">February</option>
@@ -67,7 +67,7 @@
                             <option value="November" class="">November</option>
                             <option value="December" class="">December</option>
                         </select>
-                        <select class="">
+                        <select class="" name = "day">
                             <option value="Day" class="">- Day -</option>
                             <option value="01" class="">1</option>
                             <option value="02" class="">2</option>
@@ -101,7 +101,7 @@
                             <option value="03" class="">30</option>
                             <option value="03" class="">31</option>
                         </select>
-                        <select class="">
+                        <select class="" name = "time">
                             <option value="Time" class="">Time am/pm</option>
                             <option value="10am" class="">10:00am</option>
                             <option value="1030am" class="">10:30am</option>
