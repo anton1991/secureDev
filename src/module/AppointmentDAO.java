@@ -42,10 +42,11 @@ public class AppointmentDAO {
 		}
 		return true;
 	}
-	public static AppointmentBean get_appointment_regular(String Owner)
+	public static List<AppointmentBean> get_appointment_regular(String Owner)
 	{
 		PreparedStatement stmt=null;
 		AppointmentBean bean = new AppointmentBean();
+		List<AppointmentBean> beans = new ArrayList<AppointmentBean>();
 		try
 		{
 				//connect to DB 
@@ -63,7 +64,7 @@ public class AppointmentDAO {
 			    rs = stmt.executeQuery();	
 			    while ( rs.next() )
 			    {
-			    	
+			    	bean = new AppointmentBean();
 			    	bean.setFirstName(rs.getString("FIRST_NAME"));
 			    	bean.setLastName(rs.getString("LAST_NAME"));
 			    	bean.setEmail(rs.getString("EMAIL"));
@@ -74,8 +75,9 @@ public class AppointmentDAO {
 			    	bean.setRegarding(rs.getString("REGARDING"));
 			    	bean.setOWNER(Owner);
 			    	bean.setMessage(rs.getString("MESSAGE"));
+			    	beans.add(bean);
 			    }
-			    return bean;
+			    return beans;
 		}
 		catch (Exception ex) 
 		{
