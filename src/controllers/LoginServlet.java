@@ -52,7 +52,7 @@ public class LoginServlet extends HttpServlet {
 		     if (user.isValid())
 		     {
 					//setting cookie to expiry in 30 mins
-		          session.setAttribute("user_name",user.getFirstName());
+		          session.setAttribute("user_name",user.getUsername());
 		          session.setAttribute("loged_in", "true");
 		          
 		            
