@@ -54,6 +54,16 @@
     <servlet-name>HomeServlet</servlet-name>
     <url-pattern>/Home</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <description></description>
+    <display-name>ShowAppointment</display-name>
+    <servlet-name>ShowAppointmentsServlet</servlet-name>
+    <servlet-class>controllers.ShowAppointmentsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowAppointmentsServlet</servlet-name>
+    <url-pattern>/ShowAppointment</url-pattern>
+  </servlet-mapping>
   <session-config>
     <cookie-config>
       <http-only>true</http-only>
