@@ -24,10 +24,10 @@
       <table class="table table-hover" style="margin: 0 auto; width: 800px; text-align: center; overflow-y:scroll; height: 500px; display: block">
     <!-- here should go some titles... -->
     <tr class="active" >
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Message</th>
+        <th style="text-align: center">First Name</th>
+        <th style="text-align: center">Last Name</th>
+        <th style="text-align: center">Email</th>
+        <th style="text-align: center">Message</th>
     </tr>
     <c:forEach items="${appointment}"  var="book">
     <tr class="success">
