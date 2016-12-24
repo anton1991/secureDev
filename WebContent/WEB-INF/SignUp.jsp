@@ -28,7 +28,7 @@
 	               	</div>
 	            </div> 
 				<div class="main-login main-center" >
-					<form class="form-horizontal" action="SignInController" method="post" style="width:300px; margin:0 auto" >
+					<form class="form-horizontal" enctype="multipart/form-data" action="SignInController" method="post" style="width:300px; margin:0 auto" >
 						
 						<div class="form-group" >
 							<label for="name" class="cols-sm-2 control-label">first Name</label>
@@ -76,6 +76,14 @@
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
 									<input type="password" class="form-control" style="width:200px" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+									<input type="file" name="photo" id="exampleInputFile" />
 								</div>
 							</div>
 						</div>

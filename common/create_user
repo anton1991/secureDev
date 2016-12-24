@@ -1,9 +1,16 @@
+DROP table user_auth;
 CREATE TABLE user_auth(
    id integer primary key autoincrement NOT NULL,
    FIRST_NAME           TEXT    NOT NULL,
    LAST_NAME           TEXT    NOT NULL,
    EMAIL           TEXT    NOT NULL,
-   PASSWORD           TEXT    NOT NULL);
+   PASSWORD           TEXT    NOT NULL,
+   TYPE           TEXT    NOT NULL,
+   PHOTO 		  TEXT,
+   ADDRESS		   TEXT,
+   PHONE			TEXT);
+   
+ 
    
 CREATE TABLE appointment(
    id integer primary key autoincrement NOT NULL,

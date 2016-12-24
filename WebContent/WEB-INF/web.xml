@@ -58,7 +58,7 @@
     <servlet-name>HomeServlet</servlet-name>
     <url-pattern>/Home</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <description></description>
     <display-name>ShowAppointment</display-name>
     <servlet-name>ShowAppointmentsServlet</servlet-name>
@@ -74,4 +74,8 @@
       <secure>true</secure>
     </cookie-config>
   </session-config>
+  <context-param>
+            <param-name>user_photos</param-name>
+            <param-value>/WEB-INF/user_phtos</param-value>
+    </context-param>
 </web-app>
