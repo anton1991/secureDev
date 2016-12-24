@@ -20,7 +20,7 @@
             		<a href="SignUp" class="btn btn-dark btn-lg">Sign Up</a>			    
             		</c:when>
 			    <c:otherwise>
-			    	<a href="Calendar" class="btn btn-dark btn-lg">Cat hair</a>
+			    	<a href="Profile" class="btn btn-dark btn-lg">Your Profile</a>
 			   </c:otherwise>
 			</c:choose> 
 		

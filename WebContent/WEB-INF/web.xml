@@ -4,10 +4,10 @@
   <welcome-file-list>
     <welcome-file>Home</welcome-file>
   </welcome-file-list>
-   <error-page>
-       <error-code>404</error-code>
-         <location>/Error.jsp</location>
-   </error-page>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/Error.jsp</location>
+  </error-page>
   <servlet>
     <description></description>
     <display-name>/</display-name>
@@ -68,6 +68,26 @@
     <servlet-name>ShowAppointmentsServlet</servlet-name>
     <url-pattern>/ShowAppointment</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Profile</display-name>
+    <servlet-name>ProfileServlet</servlet-name>
+    <servlet-class>controllers.ProfileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProfileServlet</servlet-name>
+    <url-pattern>/Profile</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <description></description>
+    <display-name>EditProfile</display-name>
+    <servlet-name>EditProfileServlet</servlet-name>
+    <servlet-class>controllers.EditProfileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditProfileServlet</servlet-name>
+    <url-pattern>/EditProfile</url-pattern>
+  </servlet-mapping>
   <session-config>
     <cookie-config>
       <http-only>true</http-only>
@@ -75,7 +95,7 @@
     </cookie-config>
   </session-config>
   <context-param>
-            <param-name>user_photos</param-name>
-            <param-value>/WEB-INF/user_phtos</param-value>
-    </context-param>
+    <param-name>user_photos</param-name>
+    <param-value>/WEB-INF/user_phtos</param-value>
+  </context-param>
 </web-app>

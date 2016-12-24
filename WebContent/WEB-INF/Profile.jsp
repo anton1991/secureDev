@@ -64,6 +64,7 @@
                   </table>
                   
                   <a href="/secureDev/ShowAppointment" class="btn btn-primary">My Appointments</a>
+                  <a href="/secureDev/Calendar" class="btn btn-primary">Order a new Appointment</a>
                 </div>
               </div>
             </div>
