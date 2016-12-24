@@ -37,7 +37,7 @@ public class ShowAppointmentsServlet extends HttpServlet {
 		List<AppointmentBean> appointments = null;
         if(session  !=null && session.getAttribute("loged_in").equals("true"))
         {
-        	appointments = AppointmentDAO.get_appointment_regular(session.getAttribute("user_name").toString());
+        	appointments = AppointmentDAO.get_appointment_regular(session.getAttribute("user_name").toString(),session.getAttribute("user_type").toString());
         	request.setAttribute("appointment", appointments);
         	request.getRequestDispatcher("/WEB-INF/Admin.jsp").include(request, response); 
         }

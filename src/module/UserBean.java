@@ -5,7 +5,11 @@ public class UserBean {
       private String password;
       private String firstName;
       private String lastName;
+      private String type;
+      private String phone;
+      private String address;
       public boolean valid;
+      private String photo;
 	
 	
       public String getFirstName() {
@@ -51,4 +55,33 @@ public class UserBean {
       public void setValid(boolean newValid) {
          valid = newValid;
 	}	
+      public String getType() {
+          return type;
+ 	}
+
+       public void setType(String newType) {
+          type = newType;
+ 	}
+
+        public String getPhoto() {
+            return photo;
+   	}
+
+         public void setPhoto(String newPhoto) {
+            photo = newPhoto;
+   	}
+         public String getPhone() {
+             return phone;
+    	}
+
+          public void setPhone(String newPhone) {
+             phone = newPhone;
+    	}
+          public String getAddress() {
+              return address;
+     	}
+
+           public void setAddess(String newAddress) {
+              phone = newAddress;
+     	}
 }

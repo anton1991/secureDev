@@ -42,7 +42,7 @@ public class AppointmentDAO {
 		}
 		return true;
 	}
-	public static List<AppointmentBean> get_appointment_regular(String Owner)
+	public static List<AppointmentBean> get_appointment_regular(String Owner, String type)
 	{
 		PreparedStatement stmt=null;
 		AppointmentBean bean = new AppointmentBean();
@@ -52,7 +52,7 @@ public class AppointmentDAO {
 				//connect to DB 
 				currentCon = ConnectionManager.getConnection();
 			    //clear sql injection threat
-				if (Owner == "the_king")
+				if (type != "admin")
 				{
 					stmt= currentCon.prepareStatement("select FIRST_NAME, LAST_NAME, EMAIL,MESSAGE,REGARDING,MONTH,DAY,TIME,PHONE from appointment where  OWNER = ?;");
 					stmt.setString(0, bean.getOwner());

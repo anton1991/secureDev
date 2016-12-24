@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.sendRedirect("LogInPage.jsp");
+		 request.getRequestDispatcher("/WEB-INF/LogInPage.jsp").forward(request, response);
 	}
 
 	/**
@@ -54,9 +54,9 @@ public class LoginServlet extends HttpServlet {
 					//setting cookie to expiry in 30 mins
 		          session.setAttribute("user_name",user.getUsername());
 		          session.setAttribute("loged_in", "true");
-		          
-		            
-		            response.addCookie(userCookie);
+		          session.setAttribute("loged_in", "true");
+		          session.setAttribute("user_type", user.getType());
+		          response.addCookie(userCookie);
 		          request.getRequestDispatcher("Home").forward(request, response);
 
 		     }
