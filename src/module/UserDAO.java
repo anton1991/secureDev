@@ -23,6 +23,10 @@ public class UserDAO
 public static Boolean sign_up(UserBean bean)
 {
 	PreparedStatement stmt=null;
+	if (is_user_exists(bean.getUsername()))
+	{
+		return false;
+	}
 	try
 	{
 		//connect to DB 
@@ -78,6 +82,35 @@ public static UserBean get_user_data(String user_email)
 	}
 }
 
+private static boolean is_user_exists(String User_name)
+{
+	PreparedStatement stmt=null;
+	//connect to DB 
+	try
+	{
+	currentCon = ConnectionManager.getConnection();
+	stmt= currentCon.prepareStatement("select * from user_auth WHERE EMAIL = ?");
+	stmt.setString(1, User_name);
+	rs = stmt.executeQuery();	        
+    boolean more = rs.next();
+    if (more)
+    {
+    	return true;
+    }
+    else 
+    {
+    	return false;
+    }
+	}
+	
+	catch (Exception ex) 
+	{
+		System.out.println("is user exists  failed: An Exception has occurred! " + ex);
+		return false;
+	}
+}
+	
+
 public static boolean update_user_data(UserBean bean)
 {
 	PreparedStatement stmt=null;
@@ -88,12 +121,12 @@ public static boolean update_user_data(UserBean bean)
 		    //clear sql injection threat
 
 				stmt= currentCon.prepareStatement("UPDATE user_auth SET FIRST_NAME = ?, LAST_NAME = ?, PHONE = ?,ADDRESS = ?,PHOTO = ? WHERE EMAIL = ?");
-				stmt.setString(0, bean.getFirstName());
-				stmt.setString(1, bean.getLastName());
-				stmt.setString(2, bean.getPhone());
-				stmt.setString(3, bean.getAddress());
-				stmt.setString(4, bean.getPhoto());
-				stmt.setString(5, bean.getUsername());
+				stmt.setString(1, bean.getFirstName());
+				stmt.setString(2, bean.getLastName());
+				stmt.setString(3, bean.getPhone());
+				stmt.setString(4, bean.getAddress());
+				stmt.setString(5, bean.getPhoto());
+				stmt.setString(6, bean.getUsername());
 				stmt.executeUpdate();	
 				
 		    return true;

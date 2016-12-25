@@ -47,6 +47,7 @@ public class CalendarServlet extends HttpServlet {
 				new_apoint.setDay(request.getParameter("day"));
 				new_apoint.setTime(request.getParameter("time"));
 				new_apoint.setMessage(request.getParameter("message"));
+				System.out.println(new_apoint.getFirstName()+"---"+new_apoint.getOwner()+"---"+new_apoint.getEmail());
 				boolean res = AppointmentDAO.set_appointment(new_apoint);
 		    }
 			catch (Exception ex)

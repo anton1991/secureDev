@@ -19,63 +19,60 @@ import module.UserDAO;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * Default constructor. 
-     */
-    public LoginServlet() {
-        super();
-        }
-
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Default constructor.
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		 request.getRequestDispatcher("/WEB-INF/LogInPage.jsp").forward(request, response);
+	public LoginServlet() {
+		super();
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try
-		{	    
-	         HttpSession session = request.getSession(true);	    
-		     UserBean user = new UserBean();
-		     String sessionId = session.getId();
-		     Cookie userCookie = new Cookie("JSESSIONID", sessionId);
-		     user.setUserName(request.getParameter("username"));
-		     user.setPassword(request.getParameter("password"));
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		request.getRequestDispatcher("/WEB-INF/LogInPage.jsp").forward(request, response);
+	}
 
-		     user = UserDAO.login(user);
-			   		    
-		     if (user.isValid())
-		     {
-					//setting cookie to expiry in 30 mins
-		          session.setAttribute("user_name",user.getUsername());
-		          session.setAttribute("loged_in", "true");
-		          session.setAttribute("loged_in", "true");
-		          session.setAttribute("user_type", user.getType());
-		          response.addCookie(userCookie);
-		          request.getRequestDispatcher("Home").forward(request, response);
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		try {
+			HttpSession session = request.getSession(true);
+			UserBean user = new UserBean();
+			String sessionId = session.getId();
+			Cookie userCookie = new Cookie("JSESSIONID", sessionId);
+			user.setUserName(request.getParameter("username"));
+			user.setPassword(request.getParameter("password"));
 
-		     }
-			        
-		     else 
-		     {
-		    	 userCookie.setMaxAge(0);
-		    	 response.addCookie(userCookie);
-		    	 request.setAttribute("msg", "fuck you");
-		    	 request.getRequestDispatcher("LogInPage.jsp").forward(request, response);
-		     }
-		} 
-				
-				
-		catch (Throwable theException) 	    
-		{
-		     System.out.println(theException); 
+			user = UserDAO.login(user);
+
+			if (user.isValid()) {
+				// setting cookie to expiry in 30 mins
+				session.setAttribute("user_name", user.getUsername());
+				session.setAttribute("loged_in", "true");
+				session.setAttribute("user_type", user.getType());
+				response.addCookie(userCookie);
+				request.getRequestDispatcher("Home").forward(request, response);
+
+			}
+
+			else {
+				userCookie.setMaxAge(0);
+				response.addCookie(userCookie);
+				request.setAttribute("msg", "fuck you");
+				request.getRequestDispatcher("LogInPage.jsp").forward(request, response);
+			}
 		}
-		       
+
+		catch (Throwable theException) {
+			System.out.println(theException);
+		}
+
 	}
 }
-

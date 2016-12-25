@@ -33,43 +33,42 @@
     <!-- edit form column -->
     <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
       <h3>Personal info</h3>
-      <form class="form-horizontal" role="form">
+      <form class="form-horizontal" role="form" action="EditProfile" method="post">
         <div class="form-group">
           <label class="col-lg-3 control-label">First name:</label>
           <div class="col-lg-8">
-            <input class="form-control" value="Jane" type="text">
+            <input class="form-control" value="${profile.getFirstName()}" type="text">
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Last name:</label>
           <div class="col-lg-8">
-            <input class="form-control" value="Bishop" type="text">
+            <input class="form-control" value="${profile.getLastName()}" type="text">
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Email:</label>
           <div class="col-lg-8">
-            <input class="form-control" value="janesemail@gmail.com" disabled type="text">
+            <input class="form-control" value="${profile.getUsername()}" disabled type="text">
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Home Adress:</label>
           <div class="col-lg-8">
-            <input class="form-control" value="Hahistadrot 12 , Holon" type="text">
+            <input class="form-control" value="${profile.getAddress()}" type="text">
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Phone Number:</label>
           <div class="col-lg-8">
-            <input class="form-control" value="054-7628443" type="text">
+            <input class="form-control" value="${profile.getPhone()}" type="text">
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-3 control-label"></label>
           <div class="col-md-8">
-            <input class="btn btn-primary" value="Save Changes" type="button">
+            <input class="btn btn-primary" value="Save Changes" type="submit">
             <span></span>
-            <input class="btn btn-default" value="Cancel" type="reset">
           </div>
         </div>
       </form>

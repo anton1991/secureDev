@@ -14,6 +14,7 @@ import module.UserBean;
 import javax.servlet.http.Part;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 
 /**
  * Servlet implementation class SignInController
@@ -47,24 +48,24 @@ public class SignInController extends HttpServlet {
 		// TODO Auto-generated method stub
 		UserBean new_user = new UserBean();
 		InputStream inputStream = null; // input stream of the upload file
+	
         
         // obtains the upload file part in this multipart request
         Part filePart = request.getPart("photo");
-        System.out.println(filePart.toString());
+        System.out.println(System.getProperty("user.dir"));
         if (filePart != null) {
         	File uploads = new File(System.getProperty("user.dir"));
 
         	File file = new File(uploads, request.getParameter("email")+"_photo.jpg");
 
         	try (InputStream input = filePart.getInputStream()) {
-        	    Files.copy(input, file.toPath());
-        	    new_user.setPhoto(request.getParameter("email")+"_photo.jpg");
+        	    Files.copy(input, file.toPath(),StandardCopyOption.REPLACE_EXISTING);
+        	    new_user.setPhoto(System.getProperty("user.dir")+"/"+request.getParameter("email")+"_photo.jpg");
         	}
         	catch (Exception ex) 
         	   {
         	      System.out.println("upload photo: An Exception has occurred! " + ex);
         	      
-        	      System.out.println(System.getProperty("user.dir"));
         	      return;
         	   }  
         }
@@ -75,8 +76,16 @@ public class SignInController extends HttpServlet {
 	    new_user.setPassword(request.getParameter("password"));
 	     
 	    new_user.setType("guest");
-   	 	UserDAO.sign_up(new_user);
-   	 	request.getRequestDispatcher("/WEB-INF/LogInPage.jsp").forward(request, response);
+   	 	boolean status = UserDAO.sign_up(new_user);
+   	 	if (status)
+   	 	{
+   	 		request.getRequestDispatcher("/WEB-INF/LogInPage.jsp").forward(request, response);
+   	 	}
+   	 	else
+   	 	{
+   	 		System.out.println("user already exists" );
+   	 		request.getRequestDispatcher("/WEB-INF/SignUp.jsp").forward(request, response);
+   	 	}
 
 	}
 
