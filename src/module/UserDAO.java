@@ -57,8 +57,8 @@ public static UserBean get_user_data(String user_email)
 			currentCon = ConnectionManager.getConnection();
 		    //clear sql injection threat
 
-				stmt= currentCon.prepareStatement("select * from appointment where  EMAIL = ?;");
-				stmt.setString(0, user_email);
+				stmt= currentCon.prepareStatement("select * from user_auth where  EMAIL = ?;");
+				stmt.setString(1, user_email);
 		    rs = stmt.executeQuery();	
 		    while ( rs.next() )
 		    {

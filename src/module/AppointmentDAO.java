@@ -37,7 +37,7 @@ public class AppointmentDAO {
 		}
 		catch (Exception ex) 
 		{
-			System.out.println("Log In failed: An Exception has occurred! " + ex);
+			System.out.println("Log In failed1: An Exception has occurred! " + ex);
 			return false;
 		}
 		return true;
@@ -52,17 +52,20 @@ public class AppointmentDAO {
 				//connect to DB 
 				currentCon = ConnectionManager.getConnection();
 			    //clear sql injection threat
-				if (type != "admin")
+				type=type.toString();
+				if (!type.equals("admin"))
 				{
+					System.out.println(type);
 					stmt= currentCon.prepareStatement("select FIRST_NAME, LAST_NAME, EMAIL,MESSAGE,REGARDING,MONTH,DAY,TIME,PHONE from appointment where  OWNER = ?;");
-					stmt.setString(0, bean.getOwner());
+					stmt.setString(1, Owner);
 				}
 				else
 				{
+					System.out.println(type);
 					stmt= currentCon.prepareStatement("select FIRST_NAME, LAST_NAME, EMAIL,MESSAGE,REGARDING,MONTH,DAY,TIME,PHONE from appointment");
 				}
-			    rs = stmt.executeQuery();	
-			    while ( rs.next() )
+				rs = stmt.executeQuery();	
+			    while ( rs.next())
 			    {
 			    	bean = new AppointmentBean();
 			    	bean.setFirstName(rs.getString("FIRST_NAME"));
@@ -81,7 +84,7 @@ public class AppointmentDAO {
 		}
 		catch (Exception ex) 
 		{
-			System.out.println("Log In failed: An Exception has occurred! " + ex);
+			System.out.println("Log In failed2: An Exception has occurred! " + ex);
 			return null;
 		}
 	}

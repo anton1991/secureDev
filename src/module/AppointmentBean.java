@@ -10,6 +10,7 @@ public class AppointmentBean {
       private String day;
       private String time;
       private String message;
+      public boolean valid;
       private String owner;
 	
 	
@@ -91,6 +92,11 @@ public class AppointmentBean {
             public void setOWNER(String new_Owner) {
             	owner = new_Owner;
             }
+
+			public void setValid(boolean newValid) {
+				valid = newValid;
+				
+			}
   
    	
        

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import module.AppointmentBean;
 import module.AppointmentDAO;
+import module.UserBean;
+import module.UserDAO;
 
 /**
  * Servlet implementation class ProfileServlet
@@ -32,20 +34,21 @@ public class ProfileServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		HttpSession session = request.getSession(false);
-		List<AppointmentBean> appointments = null;
-        if(session  !=null && session.getAttribute("loged_in").equals("true"))
-        {
-        	appointments = AppointmentDAO.get_appointment_regular(session.getAttribute("user_name").toString(),session.getAttribute("user_type").toString());
-        	request.setAttribute("appointment", appointments);
-        	request.getRequestDispatcher("/WEB-INF/Profile.jsp").include(request, response); 
-        }
-        else
-        {
-        	System.out.println("not autoraized");
-        	response.sendRedirect("LogIn");
-        }
+		 HttpSession session = request.getSession(false);	
+		 UserBean user_data = null;
+	     if(session  !=null && session.getAttribute("loged_in").equals("true"))
+	     {
+	    	 
+	    	user_data = UserDAO.get_user_data(session.getAttribute("user_name").toString());
+	    	System.out.println(user_data.getFirstName());
+	    	request.setAttribute("user_data", user_data);
+	    	request.getRequestDispatcher("/WEB-INF/Profile.jsp").include(request, response); 
+	     }
+	     else 
+	     {
+	        	System.out.println("not autoraized");
+	        	response.sendRedirect("LogIn");
+	     }
 	}
 
 	/**

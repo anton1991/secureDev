@@ -29,11 +29,11 @@
    
           <div class="panel panel-info">
             <div class="panel-heading">
-              <h3 class="panel-title">Sheena Shrestha</h3>
+              <h3 class="panel-title">${user_data.getFirstName()} ${user_data.getLastName()}</h3>
             </div>
             <div class="panel-body">
               <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> </div>
+                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="${user_data.getPhoto()}" class="img-circle img-responsive"> </div>
                 
 
                 <div class=" col-md-9 col-lg-9 "> 
@@ -41,22 +41,22 @@
                     <tbody>
                       <tr>
                         <td>First Name:</td>
-                        <td><c:out value="${profile.getFirstName()}" /></td>
+                        <td><c:out value="${user_data.getFirstName()}" /></td>
                       </tr>
                       <tr>
                         <td>Last Name:</td>
-                        <td><c:out value="${profile.getLastName()}" /></td>
+                        <td><c:out value="${user_data.getLastName()}" /></td>
                       </tr>
                       <tr>
                         <td>Email:</td>
-                        <td><c:out value="${profile.getEmail()}" /></td>
+                        <td><c:out value="${user_data.getUsername()}" /></td>
                       </tr>
                         <tr>
                         <td>Home Address:</td>
-                        <td><c:out value="${profile.getAdress()}" /></td>
+                        <td><c:out value="${user_data.getAddress()}" /></td>
                       </tr>
                         <td>Phone Number:</td>
-                        <td><c:out value="${profile.getPhoneNumber()}" /></td>
+                        <td><c:out value="${user_data.getPhone()}" /></td>
                            
                       </tr>
                      
