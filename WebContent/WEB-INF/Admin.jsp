@@ -28,6 +28,9 @@
         <th style="text-align: center">Last Name</th>
         <th style="text-align: center">Email</th>
         <th style="text-align: center">Message</th>
+        <th style="text-align: center">Day</th>
+        <th style="text-align: center">Month</th>
+        <th style="text-align: center">Time</th>
     </tr>
     <c:forEach items="${appointment}"  var="book">
     <tr class="success">
@@ -42,6 +45,15 @@
         </td>
         <td>
             <c:out value="${book.getMessage()}" />
+        </td>
+         <td>
+            <c:out value="${book.getDay()}" />
+        </td>
+         <td>
+            <c:out value="${book.getMonth()}" />
+        </td>
+         <td>
+            <c:out value="${book.getTime()}" />
         </td>
     </tr>
     </c:forEach>
