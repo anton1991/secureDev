@@ -40,6 +40,7 @@ public class EditProfileServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("jjjjjj");
 		 HttpSession session = request.getSession(false);	
 		 UserBean user_data = null;
 	     if(session  !=null && session.getAttribute("loged_in").equals("true"))
@@ -48,6 +49,9 @@ public class EditProfileServlet extends HttpServlet {
 	    	request.setAttribute("img_url", user_data.getPhoto());
 	    	request.setAttribute("profile", user_data);
 	    	System.out.println(user_data.getUsername());
+	    	System.out.println(user_data.getLastName());
+	    	System.out.println(user_data.getLastName());
+	    	System.out.println(session.getAttribute("user_name").toString());
 	    	request.getRequestDispatcher("/WEB-INF/ProfileEdit.jsp").include(request, response); 
 	          
 	     }

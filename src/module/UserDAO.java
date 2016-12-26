@@ -48,6 +48,12 @@ public static Boolean sign_up(UserBean bean)
 		System.out.println("Sgin In failed: An Exception has occurred! " + ex);
 		return false;
 	}
+    if (currentCon != null) {
+        try {
+           currentCon.close();
+        } catch (Exception e) {
+        }
+    }
 	return true;
 }
 
@@ -73,6 +79,12 @@ public static UserBean get_user_data(String user_email)
 		    	bean.setAddess(rs.getString("ADDRESS"));
 		    	bean.setPhoto(rs.getString("PHOTO"));
 		    }
+		    if (currentCon != null) {
+		        try {
+		           currentCon.close();
+		        } catch (Exception e) {
+		        }
+		    }
 		    return bean;
 	}
 	catch (Exception ex) 
@@ -95,10 +107,22 @@ private static boolean is_user_exists(String User_name)
     boolean more = rs.next();
     if (more)
     {
+        if (currentCon != null) {
+            try {
+               currentCon.close();
+            } catch (Exception e) {
+            }
+        }
     	return true;
     }
     else 
     {
+        if (currentCon != null) {
+            try {
+               currentCon.close();
+            } catch (Exception e) {
+            }
+        }
     	return false;
     }
 	}
@@ -128,7 +152,12 @@ public static boolean update_user_data(UserBean bean)
 				stmt.setString(5, bean.getPhoto());
 				stmt.setString(6, bean.getUsername());
 				stmt.executeUpdate();	
-				
+			    if (currentCon != null) {
+			        try {
+			           currentCon.close();
+			        } catch (Exception e) {
+			        }
+			    }	
 		    return true;
 	}
 	catch (Exception ex) 
@@ -176,6 +205,12 @@ public static UserBean login(UserBean bean) {
          bean.setLastName(lastName);
          bean.setType(type);
          bean.setValid(true);
+      }
+      if (currentCon != null) {
+          try {
+             currentCon.close();
+          } catch (Exception e) {
+          }
       }
    } 
 
