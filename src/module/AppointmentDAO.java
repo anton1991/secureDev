@@ -9,23 +9,24 @@ import javax.servlet.http.HttpSession;
 import java.sql.*;
 
 import secureDev.ConnectionManager;
+import module.UserBean;
+import module.UserDAO;
 
 public class AppointmentDAO {
 	static Connection currentCon = null;
 	static ResultSet rs = null;
-	public static Boolean set_appointment(AppointmentBean bean)
+	public static Boolean set_appointment(AppointmentBean bean, UserBean usr)
 	{
 		PreparedStatement stmt=null;
-		
 		try
 		{
 				//connect to DB 
 				currentCon = ConnectionManager.getConnection();
 			    //clear sql injection threat
 			    stmt= currentCon.prepareStatement("INSERT INTO appointment (FIRST_NAME, LAST_NAME, EMAIL,MESSAGE,REGARDING,MONTH,DAY,TIME,PHONE,OWNER) VALUES (?,?,?,?,?,?,?,?,?,?);");
-			    stmt.setString(1, bean.getFirstName());
-			    stmt.setString(2, bean.getLastName());
-			    stmt.setString(3, bean.getEmail());
+			    stmt.setString(1, usr.getFirstName());
+			    stmt.setString(2, usr.getLastName());
+			    stmt.setString(3, usr.getUsername());
 			    stmt.setString(4, bean.getMessage());
 			    stmt.setString(5, bean.getRegarding());
 			    stmt.setString(6, bean.getMonth());

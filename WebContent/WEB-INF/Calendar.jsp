@@ -29,13 +29,13 @@
         <div class="row">
             <div class="span2">
                 <label class="" >First Name</label>
-                <input type="text" name = "first_name" class="span2" placeholder="">
+                <input disabled type="text" name = "first_name" class="span2" placeholder="" value="${profile.getFirstName()}">
                 <label class="" >Last Name</label>
-                <input type="text" name = "last_name" class="span2" placeholder="">
+                <input disabled type="text" name = "last_name" class="span2" placeholder="" value="${profile.getLastName()}">
                 <label class="" >Phone</label>
                 <input type="text" name = "phone" class="span2" placeholder="">
                 <label class="" >Email</label>
-                <input type="text" name= "email" class="span2" placeholder="">
+                <input disabled type="text" name= "email" class="span2" placeholder="" value="${profile.getUsername()}">
                 <select id="subject" name="regarding" class="span2">
                     <option value="na" selected="" class="">Visit regarding...</option>
                     <option value="MySon" class="">My son</option>

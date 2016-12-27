@@ -2,7 +2,8 @@ package controllers;
   
 import java.io.IOException;  
 import java.io.PrintWriter;  
-import javax.servlet.ServletException;  
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;  
 import javax.servlet.http.HttpServlet;  
 import javax.servlet.http.HttpServletRequest;  
@@ -10,15 +11,23 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import module.AppointmentBean;
-import module.AppointmentDAO;  
+import module.AppointmentDAO; 
+import module.UserBean;
+import module.UserDAO;
+
+
+@WebServlet("/CalendarServlet")
 public class CalendarServlet extends HttpServlet {  
     protected void doGet(HttpServletRequest request, HttpServletResponse response)  
                           throws ServletException, IOException {  
         response.setContentType("text/html");  
-        HttpSession session = request.getSession(false);	   
+        HttpSession session = request.getSession(false);
+        UserBean user_data = null;
         if(session  !=null && session.getAttribute("loged_in").equals("true"))
         {
         	request.setAttribute("user_loged_in", "anton");
+        	user_data = UserDAO.get_user_data(session.getAttribute("user_name").toString());
+        	request.setAttribute("profile", user_data);
         	request.getRequestDispatcher("/WEB-INF/Calendar.jsp").include(request, response); 
         }
         else
@@ -33,10 +42,13 @@ public class CalendarServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		AppointmentBean new_apoint = new AppointmentBean(); 
+		UserBean user_data = null;
 		if(session  !=null && session.getAttribute("loged_in").equals("true"))
 		{
 			try
 			{	    
+	        	user_data = UserDAO.get_user_data(session.getAttribute("user_name").toString());
+	        	request.setAttribute("profile", user_data);
 				new_apoint.setOWNER(session.getAttribute("user_name").toString());
 				new_apoint.setFirstName(request.getParameter("first_name"));
 				new_apoint.setLastName(request.getParameter("last_name"));
@@ -48,7 +60,8 @@ public class CalendarServlet extends HttpServlet {
 				new_apoint.setTime(request.getParameter("time"));
 				new_apoint.setMessage(request.getParameter("message"));
 				System.out.println(new_apoint.getFirstName()+"---"+new_apoint.getOwner()+"---"+new_apoint.getEmail());
-				boolean res = AppointmentDAO.set_appointment(new_apoint);
+				System.out.println(user_data.getUsername());
+				boolean res = AppointmentDAO.set_appointment(new_apoint, user_data);
 		    }
 			catch (Exception ex)
 			{
