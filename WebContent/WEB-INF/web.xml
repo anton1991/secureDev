@@ -96,6 +96,6 @@
   </session-config>
   <context-param>
     <param-name>user_photos</param-name>
-    <param-value>/WEB-INF/user_phtos</param-value>
+    <param-value>/Users/antong/Documents/workspace/secureDev/WebContent/Images</param-value>
   </context-param>
 </web-app>

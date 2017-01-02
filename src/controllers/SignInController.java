@@ -72,20 +72,19 @@ public class SignInController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		UserBean new_user = new UserBean();
-		InputStream inputStream = null; // input stream of the upload file
-	
+		String absolute_path = getServletContext().getInitParameter("user_photos");
+		String relative_path = "/secureDev/Images/";
         
         // obtains the upload file part in this multipart request
         Part filePart = request.getPart("photo");
-        System.out.println(System.getProperty("user.dir"));
         if (filePart != null) {
-        	File uploads = new File(System.getProperty("user.dir"));
+        	File uploads = new File(absolute_path);
 
         	File file = new File(uploads, request.getParameter("email")+"_photo.jpg");
 
         	try (InputStream input = filePart.getInputStream()) {
         	    Files.copy(input, file.toPath(),StandardCopyOption.REPLACE_EXISTING);
-        	    new_user.setPhoto(System.getProperty("user.dir")+"/"+request.getParameter("email")+"_photo.jpg");
+        	    new_user.setPhoto(relative_path+request.getParameter("email")+"_photo.jpg");
         	}
         	catch (Exception ex) 
         	   {

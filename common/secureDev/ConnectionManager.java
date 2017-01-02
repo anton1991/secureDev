@@ -13,7 +13,7 @@ public class ConnectionManager {
      
       try
       {
-    	  String url = "jdbc:sqlite:/Users/dorlaker/MySQLiteDB"; 
+    	  String url = "jdbc:sqlite:/Users/antong/MySQLiteDB"; 
          // assuming "DataSource" is your DataSource name
 
          Class.forName("org.sqlite.JDBC");

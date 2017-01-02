@@ -189,7 +189,7 @@ public static UserBean login(UserBean bean) {
       // if user does not exist set the isValid variable to false
       if (!more) 
       {
-         System.out.println("Sorry, you are not a registered user! Please sign up first");
+         System.out.println("wrong pass asshole!");
          bean.setValid(false);
       }
 	        

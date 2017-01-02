@@ -8,6 +8,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +25,8 @@ import module.UserDAO;
  * Servlet implementation class EditProfileServlet
  */
 @WebServlet("/EditProfileServlet")
+@MultipartConfig(maxFileSize = 16177215) 
+
 public class EditProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -40,13 +43,11 @@ public class EditProfileServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("jjjjjj");
 		 HttpSession session = request.getSession(false);	
 		 UserBean user_data = null;
 	     if(session  !=null && session.getAttribute("loged_in").equals("true"))
 	     {
 	    	user_data = UserDAO.get_user_data(session.getAttribute("user_name").toString());
-	    	request.setAttribute("img_url", user_data.getPhoto());
 	    	request.setAttribute("profile", user_data);
 	    	System.out.println(user_data.getUsername());
 	    	System.out.println(user_data.getLastName());
@@ -64,42 +65,52 @@ public class EditProfileServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession(false);	   
 	     if(session  !=null && session.getAttribute("loged_in").equals("true"))
 	     {
 	 		// TODO Auto-generated method stub
-	 		UserBean new_user = new UserBean();
+	 		UserBean new_user = UserDAO.get_user_data(session.getAttribute("user_name").toString());
 	 		InputStream inputStream = null; // input stream of the upload file
+	 		String absolute_path = getServletContext().getInitParameter("user_photos");
+			String relative_path = "/secureDev/Images/";
 	 	
 	         
-	         // obtains the upload file part in this multipart request
-	         Part filePart = request.getPart("photo");
-	         System.out.println(System.getProperty("user.dir"));
-	         if (filePart != null) {
-	         	File uploads = new File(System.getProperty("user.dir"));
+	        // obtains the upload file part in this multipart request
+			Part filePart = null;
+			
+			try{
+	        filePart = request.getPart("photo");
+			}
+			catch (Exception ex) 
+     	   {
+     	      System.out.println("upload photo: An Exception has occurred! " + ex);
+     
+     	   }  
+			System.out.println(filePart);
+	        if (filePart != null) {
+	        	File uploads = new File(absolute_path);
 
-	         	File file = new File(uploads, request.getParameter("email")+"_photo.jpg");
+	        	File file = new File(uploads, request.getParameter("email")+"_photo.jpg");
 
-	         	try (InputStream input = filePart.getInputStream()) {
-	         	    Files.copy(input, file.toPath(),StandardCopyOption.REPLACE_EXISTING);
-	         	    new_user.setPhoto(System.getProperty("user.dir")+"/"+request.getParameter("email")+"_photo.jpg");
-	         	}
-	         	catch (Exception ex) 
-	         	   {
-	         	      System.out.println("upload photo: An Exception has occurred! " + ex);
-	         	      
-	         	      return;
-	         	   }  
-	         }
-	 		
+	        	try (InputStream input = filePart.getInputStream()) {
+	        	    Files.copy(input, file.toPath(),StandardCopyOption.REPLACE_EXISTING);
+	        	    new_user.setPhoto(relative_path+request.getParameter("email")+"_photo.jpg");
+	        	}
+	        	catch (Exception ex) 
+	        	   {
+	        	      System.out.println("upload photo: An Exception has occurred! " + ex);
+	        	   }  
+	        }
+
 	 		new_user.setFirstName(request.getParameter("first_name"));
 	 		new_user.setLastName(request.getParameter("last_name"));
 	 	    new_user.setUserName(request.getParameter("email"));
 	 	    new_user.setPassword(request.getParameter("password"));
-	 	     
-	    	 request.getRequestDispatcher("/WEB-INF/ProfileEdit.jsp").include(request, response);
+	 	    UserDAO.update_user_data(new_user);
+	 	    response.sendRedirect("Profile");
 	     }
 	     else 
 	     {

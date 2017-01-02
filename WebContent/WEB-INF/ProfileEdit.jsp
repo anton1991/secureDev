@@ -21,19 +21,18 @@
     <jsp:body>
  
 <div class="container" >
-  <div class="row" style="border-radius: 50px 50px;opacity:0.95;background:#fff;width:800px;margin:0 auto;margin-top:0;text-align:center;">
-    <!-- left column -->
     <div class="col-md-4 col-sm-6 col-xs-12" >
-      <div class="text-center">
-        <img src="${img_url}" class="avatar img-circle img-thumbnail" alt="avatar">
-        <h6>Upload a different photo...</h6>
-        <input type="file" accept=".jpg" class="text-center center-block well well-sm">
+      <div class="text-center" >
+        <img src="${profile.getPhoto()}" class="avatar img-circle img-thumbnail" alt="avatar" style="width=100px; height=100px;">
       </div>
-    </div>
+      </div>
+<form class="form-horizontal" action="EditProfile" method="post">
+    <!-- left column -->
+
     <!-- edit form column -->
     <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
       <h3>Personal info</h3>
-      <form class="form-horizontal" role="form" action="EditProfile" method="post">
+      
         <div class="form-group">
           <label class="col-lg-3 control-label">First name:</label>
           <div class="col-lg-8">
@@ -65,6 +64,12 @@
           </div>
         </div>
         <div class="form-group">
+							<div class="col-lg-8">
+								<div class="input-group">
+									<input type="file" name="photo"/>
+								</div>
+							</div>
+						</div>
           <label class="col-md-3 control-label"></label>
           <div class="col-md-8">
             <input class="btn btn-primary" value="Save Changes" type="submit">
@@ -72,8 +77,8 @@
           </div>
         </div>
       </form>
-    </div>
-  </div>
+    
+</div>
 </div>
 
     

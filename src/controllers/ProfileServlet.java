@@ -36,11 +36,12 @@ public class ProfileServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 HttpSession session = request.getSession(false);	
 		 UserBean user_data = null;
+	 	 String path = getServletContext().getInitParameter("upload.location");
+
 	     if(session  !=null && session.getAttribute("loged_in").equals("true"))
 	     {
 	    	 
 	    	user_data = UserDAO.get_user_data(session.getAttribute("user_name").toString());
-	    	System.out.println(user_data.getFirstName());
 	    	request.setAttribute("user_data", user_data);
 	    	request.getRequestDispatcher("/WEB-INF/Profile.jsp").include(request, response); 
 	     }
