@@ -20,6 +20,7 @@ import module.AppointmentBean;
 import module.AppointmentDAO;
 import module.UserBean;
 import module.UserDAO;
+import secureDev.ImageDocumentSanitizerImpl;
 
 /**
  * Servlet implementation class EditProfileServlet
@@ -89,16 +90,29 @@ public class EditProfileServlet extends HttpServlet {
      	      System.out.println("upload photo: An Exception has occurred! " + ex);
      
      	   }  
-			System.out.println(filePart);
+			
+			
 	        if (filePart.getSize() != 0) 
 	        {
+	        	
 	        	File uploads = new File(absolute_path);
 
 	        	File file = new File(uploads, session.getAttribute("user_name").toString()+"_photo.jpg");
-
 	        	try (InputStream input = filePart.getInputStream()) {
 	        	    Files.copy(input, file.toPath(),StandardCopyOption.REPLACE_EXISTING);
-	        	    new_user.setPhoto(relative_path+session.getAttribute("user_name").toString()+"_photo.jpg");
+	        	    
+	        	    if (ImageDocumentSanitizerImpl.madeSafe(file))
+	        	    {
+	        	    	System.out.println("image accepted");
+	        	    	new_user.setPhoto(relative_path+session.getAttribute("user_name").toString()+"_photo.jpg");
+	        	    }
+	        	    else
+	        	    {
+	        	    	System.out.println("delete");
+	        	    	file.delete();
+	        	    	new_user.setPhoto("/secureDev/img/virus.jpg");
+	        	    }
+	        	    
 	        	}
 	        	catch (Exception ex) 
 	        	   {
@@ -107,6 +121,7 @@ public class EditProfileServlet extends HttpServlet {
 	        }
 	        else
 	        {
+	        	System.out.println("no photo asshole");
 	        	new_user.setPhoto(request.getParameter("old_photo"));
 	        }
 

@@ -2,7 +2,6 @@ package secureDev;
 
 import java.sql.*;
 
-
 public class ConnectionManager {
 
    static Connection con;
