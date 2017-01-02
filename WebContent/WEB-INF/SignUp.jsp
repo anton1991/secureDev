@@ -27,7 +27,7 @@
 	               <div class="panel-title text-center">
 	               	</div>
 	            </div> 
-				<div class="main-login main-center" >
+				<div class="main-login main-center"  style="border-radius: 50px 50px;opacity:0.95;background:#fff;width:800px;margin:0 auto;margin-top:0;text-align:center;">
 					<form class="form-horizontal" enctype="multipart/form-data" action="SignInController" method="post" style="width:300px; margin:0 auto" >
 						
 						<div class="form-group" >
@@ -53,7 +53,7 @@
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" style="width:200px" name="email" id="email"  placeholder="Enter your Email"/>
+									<input type="email" class="form-control" style="width:200px" name="email" id="email"  placeholder="Enter your Email"/>
 								</div>
 							</div>
 						</div>
@@ -79,14 +79,6 @@
 								</div>
 							</div>
 						</div>
-						<div class="form-group">
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-									<input type="file" name="photo" id="exampleInputFile" />
-								</div>
-							</div>
-						</div>
 
 						<div class="form-group ">
 							<button type=submit class="btn btn-primary btn-lg btn-block login-button" style="width:200px">Register</button>
@@ -98,5 +90,20 @@
 		</div>
 
 		<script type="text/javascript" src="assets/js/bootstrap.js"></script>
+		<script>		
+			var password = document.getElementById("password"), confirm = document.getElementById("confirm");
+			function validatePassword(){
+  			if(password.value != confirm.value) {
+    			confirm.setCustomValidity("Passwords Don't Match");
+  				} else {
+    				confirm.setCustomValidity('');
+  				}
+			}
+
+			password.onchange = validatePassword;
+			confirm.onkeyup = validatePassword;
+		</script>
 		</jsp:body>
 		</t:genericpage>
+		
+

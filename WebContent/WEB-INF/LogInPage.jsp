@@ -22,9 +22,7 @@
     </jsp:attribute>
     <jsp:body>
  
-      <form class="form-signin" method="post" action="LoginServlet" style="max-width: 330px;
-  padding: 15px;
-  margin: 0 auto;">
+      <form class="form-signin" method="post" action="LoginServlet" style="max-width: 330px;padding: 15px;margin: 0 auto;">
 
 		<c:choose> 
 		  <c:when "{false}">
@@ -34,8 +32,8 @@
 		    <h2 class="form-signin-heading">${msg}</h2>
 		  </c:otherwise>
 		</c:choose>
-        
-                		<div class="form-group">
+        			
+                		<div class="form-group" >
 							<label for="inputEmail" class="sr-only">Email address</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
