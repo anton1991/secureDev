@@ -23,10 +23,10 @@
 <div class="container" >
     <div class="col-md-4 col-sm-6 col-xs-12" >
       <div class="text-center" >
-        <img src="${profile.getPhoto()}" class="avatar img-circle img-thumbnail" alt="avatar" style="width=100px; height=100px;">
+        <img src="${profile.getPhoto()}" name ="photo" class="avatar img-circle img-thumbnail" alt="avatar" style="width=100px; height=100px;">
       </div>
       </div>
-<form class="form-horizontal" action="EditProfile" method="post">
+<form class="form-horizontal" action="EditProfile" enctype="multipart/form-data" method="post">
     <!-- left column -->
 
     <!-- edit form column -->
@@ -36,13 +36,13 @@
         <div class="form-group">
           <label class="col-lg-3 control-label">First name:</label>
           <div class="col-lg-8">
-            <input class="form-control" value="${profile.getFirstName()}" type="text">
+            <input class="form-control" name="first_name" value="${profile.getFirstName()}" type="text">
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Last name:</label>
           <div class="col-lg-8">
-            <input class="form-control" value="${profile.getLastName()}" type="text">
+            <input class="form-control" name="last_name" value="${profile.getLastName()}" type="text">
           </div>
         </div>
         <div class="form-group">
@@ -54,19 +54,20 @@
         <div class="form-group">
           <label class="col-lg-3 control-label">Home Adress:</label>
           <div class="col-lg-8">
-            <input class="form-control" value="${profile.getAddress()}" type="text">
+            <input class="form-control" name="add" value="${profile.getAddress()}" type="text">
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Phone Number:</label>
           <div class="col-lg-8">
-            <input class="form-control" value="${profile.getPhone()}" type="text">
+            <input class="form-control" name="phone" value="${profile.getPhone()}" type="text">
           </div>
         </div>
         <div class="form-group">
 							<div class="col-lg-8">
 								<div class="input-group">
 									<input type="file" name="photo"/>
+									<input type="hidden" name="old_photo" value="${profile.getPhoto()}"/>
 								</div>
 							</div>
 						</div>

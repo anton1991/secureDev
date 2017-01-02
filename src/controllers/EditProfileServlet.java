@@ -91,24 +91,31 @@ public class EditProfileServlet extends HttpServlet {
      	   }  
 			System.out.println(filePart);
 	        if (filePart != null) {
+	        	System.out.println("photo not null");
 	        	File uploads = new File(absolute_path);
 
-	        	File file = new File(uploads, request.getParameter("email")+"_photo.jpg");
+	        	File file = new File(uploads, session.getAttribute("user_name").toString()+"_photo.jpg");
 
 	        	try (InputStream input = filePart.getInputStream()) {
 	        	    Files.copy(input, file.toPath(),StandardCopyOption.REPLACE_EXISTING);
-	        	    new_user.setPhoto(relative_path+request.getParameter("email")+"_photo.jpg");
+	        	    new_user.setPhoto(relative_path+session.getAttribute("user_name").toString()+"_photo.jpg");
 	        	}
 	        	catch (Exception ex) 
 	        	   {
 	        	      System.out.println("upload photo: An Exception has occurred! " + ex);
 	        	   }  
 	        }
+	        else
+	        {
+	        	new_user.setPhoto(request.getParameter("old_photo"));
+	        }
 
 	 		new_user.setFirstName(request.getParameter("first_name"));
 	 		new_user.setLastName(request.getParameter("last_name"));
-	 	    new_user.setUserName(request.getParameter("email"));
-	 	    new_user.setPassword(request.getParameter("password"));
+	 		new_user.setAddess(request.getParameter("add"));
+	 		new_user.setPhone(request.getParameter("phone"));
+	 	    new_user.setUserName(session.getAttribute("user_name").toString());
+	 	    
 	 	    UserDAO.update_user_data(new_user);
 	 	    response.sendRedirect("Profile");
 	     }

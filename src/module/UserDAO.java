@@ -151,6 +151,8 @@ public static boolean update_user_data(UserBean bean)
 				stmt.setString(4, bean.getAddress());
 				stmt.setString(5, bean.getPhoto());
 				stmt.setString(6, bean.getUsername());
+				System.out.println(bean.getUsername());
+				System.out.println(bean.getFirstName());
 				stmt.executeUpdate();	
 			    if (currentCon != null) {
 			        try {

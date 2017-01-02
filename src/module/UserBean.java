@@ -82,6 +82,6 @@ public class UserBean {
      	}
 
            public void setAddess(String newAddress) {
-              phone = newAddress;
+        	   address = newAddress;
      	}
 }
