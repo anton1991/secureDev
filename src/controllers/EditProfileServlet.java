@@ -90,8 +90,8 @@ public class EditProfileServlet extends HttpServlet {
      
      	   }  
 			System.out.println(filePart);
-	        if (filePart != null) {
-	        	System.out.println("photo not null");
+	        if (filePart.getSize() != 0) 
+	        {
 	        	File uploads = new File(absolute_path);
 
 	        	File file = new File(uploads, session.getAttribute("user_name").toString()+"_photo.jpg");
