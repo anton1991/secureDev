@@ -89,8 +89,8 @@
             <h3>Book an appointment online - NOW!</h3>
             <br>
             <a href="#about" class="btn btn-dark btn-lg">Find Out More</a>
-            <a href="LogInPage.jsp" class="btn btn-dark btn-lg">Log In</a>
-            <a href="SignUp.jsp" class="btn btn-dark btn-lg">Sign Up</a>-->
+            <a href="LogIn" class="btn btn-dark btn-lg">Log In</a>
+            <a href="SignUp" class="btn btn-dark btn-lg">Sign Up</a>-->
         </div>
     </header>
 
@@ -100,7 +100,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Busy? Don't have time for a phone call? We say no problem!</h2>
-                    <p class="lead">All you have to do is <a  href="SignUp.jsp">Sign Up</a>.</p>
+                    <p class="lead">All you have to do is <a  href="SignUp">Sign Up</a>.</p>
                 </div>
             </div>
             <!-- /.row -->
@@ -267,7 +267,7 @@
                         <br>Beverly Hills, CA 90210</p>
                     <ul class="list-unstyled">
                         <li><i class="fa fa-phone fa-fw"></i> (123) 456-7890</li>
-                        <li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:name@example.com">name@example.com</a>
+                        <li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:style@example.com">style@example.com</a>
                         </li>
                     </ul>
                     <br>
