@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -15,11 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-
-import module.AppointmentBean;
-import module.AppointmentDAO;
 import module.UserBean;
 import module.UserDAO;
+import secureDev.XssUtils;
 import secureDev.ImageDocumentSanitizerImpl;
 
 /**
@@ -77,7 +74,6 @@ public class EditProfileServlet extends HttpServlet {
 	 		InputStream inputStream = null; // input stream of the upload file
 	 		String absolute_path = getServletContext().getInitParameter("user_photos");
 			String relative_path = "/secureDev/Images/";
-	 	
 	         
 	        // obtains the upload file part in this multipart request
 			Part filePart = null;
@@ -125,10 +121,10 @@ public class EditProfileServlet extends HttpServlet {
 	        	new_user.setPhoto(request.getParameter("old_photo"));
 	        }
 
-	 		new_user.setFirstName(request.getParameter("first_name"));
-	 		new_user.setLastName(request.getParameter("last_name"));
-	 		new_user.setAddess(request.getParameter("add"));
-	 		new_user.setPhone(request.getParameter("phone"));
+	 		new_user.setFirstName(XssUtils.clearXss(request.getParameter("first_name")));
+	 		new_user.setLastName(XssUtils.clearXss(request.getParameter("last_name")));
+	 		new_user.setAddess(XssUtils.clearXss(request.getParameter("add")));
+	 		new_user.setPhone(XssUtils.clearXss(request.getParameter("phone")));
 	 	    new_user.setUserName(session.getAttribute("user_name").toString());
 	 	    
 	 	    UserDAO.update_user_data(new_user);

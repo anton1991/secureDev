@@ -64,14 +64,13 @@
           </div>
         </div>
         <div class="form-group">
-							<div class="col-lg-8">
-								<div class="input-group">
-									<input type="file" name="photo"/>
-									<input type="hidden" name="old_photo" value="${profile.getPhoto()}"/>
-								</div>
-							</div>
-						</div>
-          <label class="col-md-3 control-label"></label>
+			<label class="col-md-3 control-label"></label>
+			<div class="col-lg-8" style="padding-left:205px;">
+				<input type="file" name="photo" />
+				<input type="hidden" name="old_photo" value="${profile.getPhoto()}"/>
+			</div>
+									
+		</div>
           <div class="col-md-8">
             <input class="btn btn-primary" value="Save Changes" type="submit">
             <span></span>
