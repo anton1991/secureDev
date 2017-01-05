@@ -70,6 +70,7 @@ public class LoginServlet extends HttpServlet {
 			UserBean user = new UserBean();
 			String sessionId = session.getId();
 			Cookie userCookie = new Cookie("JSESSIONID", sessionId);
+			userCookie.setHttpOnly(true);
 			user.setUserName(request.getParameter("username"));
 			user.setPassword(getMD5(request.getParameter("password") + request.getParameter("username")));
 
@@ -89,7 +90,7 @@ public class LoginServlet extends HttpServlet {
 				userCookie.setMaxAge(0);
 				response.addCookie(userCookie);
 				request.setAttribute("msg", "fuck you");
-				request.getRequestDispatcher("LogInPage.jsp").forward(request, response);
+				request.getRequestDispatcher("LogIn").forward(request, response);
 			}
 		}
 
