@@ -23,6 +23,7 @@ public class CalendarServlet extends HttpServlet {
         response.setContentType("text/html");  
         HttpSession session = request.getSession(false);
         UserBean user_data = null;
+        //validate that user is loged in
         if(session  !=null && session.getAttribute("loged_in").equals("true"))
         {
         	request.setAttribute("user_loged_in", "anton");
@@ -43,10 +44,12 @@ public class CalendarServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		AppointmentBean new_apoint = new AppointmentBean(); 
 		UserBean user_data = null;
+		//validate that user is loged in
 		if(session  !=null && session.getAttribute("loged_in").equals("true"))
 		{
 			try
-			{	    
+			{	   
+				//create new_apoint module and save it 
 	        	user_data = UserDAO.get_user_data(session.getAttribute("user_name").toString());
 	        	request.setAttribute("profile", user_data);
 				new_apoint.setOWNER(session.getAttribute("user_name").toString());

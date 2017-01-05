@@ -27,12 +27,10 @@ public class HomeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
         HttpSession session = request.getSession(false);	   
         if(session  !=null && session.getAttribute("loged_in").equals("true"))
         {
 	        	String name = session.getAttribute("user_name").toString();
-	            System.out.println(name);
 	            request.setAttribute("user_loged_in", "anton");
         }
         

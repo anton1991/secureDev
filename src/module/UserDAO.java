@@ -188,10 +188,10 @@ public static UserBean login(UserBean bean) {
       rs = stmt.executeQuery();	        
       boolean more = rs.next();
 	       
-      // if user does not exist set the isValid variable to false
+      // if user does not exist or wrong pass set the isValid variable to false
       if (!more) 
       {
-         System.out.println("wrong pass asshole!");
+         System.out.println("wrong pass or user does not exist!");
          bean.setValid(false);
       }
 	        

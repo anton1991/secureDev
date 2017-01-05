@@ -54,6 +54,8 @@ public class AppointmentDAO {
 				currentCon = ConnectionManager.getConnection();
 			    //clear sql injection threat
 				type=type.toString();
+				//user type is saved in session and can only be accessed via db
+				//so the user can't change his type(admin/guest).
 				if (!type.equals("admin"))
 				{
 					System.out.println(type);

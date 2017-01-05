@@ -72,12 +72,13 @@ public class LoginServlet extends HttpServlet {
 			Cookie userCookie = new Cookie("JSESSIONID", sessionId);
 			userCookie.setHttpOnly(true);
 			user.setUserName(request.getParameter("username"));
+			//hash the password in md5 hashing we add the email so passwords like Aa123456 will have an extra hashed string
 			user.setPassword(getMD5(request.getParameter("password") + request.getParameter("username")));
 
 			user = UserDAO.login(user);
 
 			if (user.isValid()) {
-				// setting cookie to expiry in 30 mins
+				// setting cookie to expiry in 30 mins(defult)
 				session.setAttribute("user_name", user.getUsername());
 				session.setAttribute("loged_in", "true");
 				session.setAttribute("user_type", user.getType());

@@ -34,6 +34,7 @@ public class LogOutServlet extends HttpServlet {
 		if (session != null)
 		{
 			String sessionId = session.getId();
+			//we set loged_in to false so..if the user will try to access pages the session will know that the user is loged out
 			session.setAttribute("loged_in", "false");
 		}
 		request.getRequestDispatcher("Home").forward(request, response);

@@ -59,7 +59,7 @@ public class ImageDocumentSanitizerImpl {
 			}
 			else
 			{
-				System.out.println("crap");
+				System.out.println("cant read image file");
 			}
 
 		}

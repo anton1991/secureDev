@@ -43,14 +43,11 @@ public class EditProfileServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		 HttpSession session = request.getSession(false);	
 		 UserBean user_data = null;
+		 //validate that the user isloged in
 	     if(session  !=null && session.getAttribute("loged_in").equals("true"))
 	     {
 	    	user_data = UserDAO.get_user_data(session.getAttribute("user_name").toString());
 	    	request.setAttribute("profile", user_data);
-	    	System.out.println(user_data.getUsername());
-	    	System.out.println(user_data.getLastName());
-	    	System.out.println(user_data.getLastName());
-	    	System.out.println(session.getAttribute("user_name").toString());
 	    	request.getRequestDispatcher("/WEB-INF/ProfileEdit.jsp").include(request, response); 
 	          
 	     }
@@ -65,11 +62,11 @@ public class EditProfileServlet extends HttpServlet {
 	 */
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		//validate that the user isloged in
 		HttpSession session = request.getSession(false);	   
 	     if(session  !=null && session.getAttribute("loged_in").equals("true"))
 	     {
-	 		// TODO Auto-generated method stub
+
 	 		UserBean new_user = UserDAO.get_user_data(session.getAttribute("user_name").toString());
 	 		InputStream inputStream = null; // input stream of the upload file
 	 		String absolute_path = getServletContext().getInitParameter("user_photos");
@@ -96,7 +93,7 @@ public class EditProfileServlet extends HttpServlet {
 	        	File file = new File(uploads, session.getAttribute("user_name").toString()+"_photo.jpg");
 	        	try (InputStream input = filePart.getInputStream()) {
 	        	    Files.copy(input, file.toPath(),StandardCopyOption.REPLACE_EXISTING);
-	        	    
+	        	    //check if the file is an image
 	        	    if (ImageDocumentSanitizerImpl.madeSafe(file))
 	        	    {
 	        	    	System.out.println("image accepted");
@@ -104,7 +101,8 @@ public class EditProfileServlet extends HttpServlet {
 	        	    }
 	        	    else
 	        	    {
-	        	    	System.out.println("delete");
+	        	    	//set defult image if the file wasn't an image
+	        	    	System.out.println("delete bag image");
 	        	    	file.delete();
 	        	    	new_user.setPhoto("/secureDev/img/virus.jpg");
 	        	    }

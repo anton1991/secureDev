@@ -97,8 +97,8 @@ public class SignInController extends HttpServlet {
 		new_user.setFirstName(request.getParameter("first_name"));
 		new_user.setLastName(request.getParameter("last_name"));
 	    new_user.setUserName(request.getParameter("email"));
+	    //set a default image
 	    new_user.setPhoto("/secureDev/img/20.jpg");
-	    System.out.println("password");
 	    new_user.setPassword(getMD5(request.getParameter("password") + request.getParameter("email")));
 	     
 	    new_user.setType("guest");
