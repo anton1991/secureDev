@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import java.sql.*;
 
 import secureDev.ConnectionManager;
+import secureDev.XssUtils;
 import module.UserBean;
 import module.UserDAO;
 
@@ -22,18 +23,18 @@ public class AppointmentDAO {
 		{
 				//connect to DB 
 				currentCon = ConnectionManager.getConnection();
-			    //clear sql injection threat
+			    //clear sql injection threat and xss
 			    stmt= currentCon.prepareStatement("INSERT INTO appointment (FIRST_NAME, LAST_NAME, EMAIL,MESSAGE,REGARDING,MONTH,DAY,TIME,PHONE,OWNER) VALUES (?,?,?,?,?,?,?,?,?,?);");
-			    stmt.setString(1, usr.getFirstName());
-			    stmt.setString(2, usr.getLastName());
-			    stmt.setString(3, usr.getUsername());
-			    stmt.setString(4, bean.getMessage());
-			    stmt.setString(5, bean.getRegarding());
-			    stmt.setString(6, bean.getMonth());
-			    stmt.setString(7, bean.getDay());
-			    stmt.setString(8, bean.getTime());
-			    stmt.setString(9, bean.getPhone());
-			    stmt.setString(10, bean.getOwner());
+			    stmt.setString(1, XssUtils.clearXss(usr.getFirstName()));
+			    stmt.setString(2, XssUtils.clearXss(usr.getLastName()));
+			    stmt.setString(3, XssUtils.clearXss(usr.getUsername()));
+			    stmt.setString(4, XssUtils.clearXss(bean.getMessage()) );
+			    stmt.setString(5, XssUtils.clearXss(bean.getRegarding()));
+			    stmt.setString(6, XssUtils.clearXss(bean.getMonth()));
+			    stmt.setString(7, XssUtils.clearXss(bean.getDay()));
+			    stmt.setString(8, XssUtils.clearXss(bean.getTime()) );
+			    stmt.setString(9, XssUtils.clearXss(bean.getPhone()));
+			    stmt.setString(10, XssUtils.clearXss(bean.getOwner()));
 			    stmt.executeUpdate();	  
 		}
 		catch (Exception ex) 
@@ -71,16 +72,16 @@ public class AppointmentDAO {
 			    while ( rs.next())
 			    {
 			    	bean = new AppointmentBean();
-			    	bean.setFirstName(rs.getString("FIRST_NAME"));
-			    	bean.setLastName(rs.getString("LAST_NAME"));
-			    	bean.setEmail(rs.getString("EMAIL"));
-			    	bean.setDay(rs.getString("DAY"));
-			    	bean.setMonth(rs.getString("MONTH"));
-			    	bean.setTime(rs.getString("TIME"));
-			    	bean.setPhone(rs.getString("PHONE"));
-			    	bean.setRegarding(rs.getString("REGARDING"));
+			    	bean.setFirstName(XssUtils.clearXss(rs.getString("FIRST_NAME")));
+			    	bean.setLastName(XssUtils.clearXss(rs.getString("LAST_NAME")) );
+			    	bean.setEmail(XssUtils.clearXss(rs.getString("EMAIL")));
+			    	bean.setDay(XssUtils.clearXss(rs.getString("DAY")));
+			    	bean.setMonth(XssUtils.clearXss(rs.getString("MONTH")));
+			    	bean.setTime(XssUtils.clearXss(rs.getString("TIME")));
+			    	bean.setPhone(XssUtils.clearXss(rs.getString("PHONE")));
+			    	bean.setRegarding(XssUtils.clearXss(rs.getString("REGARDING")));
 			    	bean.setOWNER(Owner);
-			    	bean.setMessage(rs.getString("MESSAGE"));
+			    	bean.setMessage(XssUtils.clearXss(rs.getString("MESSAGE")));
 			    	beans.add(bean);
 			    }
 			    return beans;

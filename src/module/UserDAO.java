@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 
 import secureDev.ConnectionManager;
+import secureDev.XssUtils;
 import module.UserBean;
 
 public class UserDAO 	
@@ -27,6 +28,10 @@ public static Boolean sign_up(UserBean bean)
 	{
 		return false;
 	}
+	if (XssUtils.clearXss( bean.getUsername()) == "" || XssUtils.clearXss(bean.getPassword()) == "")
+	{
+		return false;
+	}
 	try
 	{
 		//connect to DB 
@@ -34,12 +39,13 @@ public static Boolean sign_up(UserBean bean)
 		currentCon = ConnectionManager.getConnection();
 	    //clear sql injection threat
 	    stmt= currentCon.prepareStatement("INSERT INTO user_auth (FIRST_NAME, LAST_NAME, EMAIL,PASSWORD, TYPE, PHOTO) VALUES (?,?,?,?,?,?);");
-	    stmt.setString(1, bean.getFirstName());
-	    stmt.setString(2, bean.getLastName());
-	    stmt.setString(3, bean.getUsername());
-	    stmt.setString(4, bean.getPassword());
-	    stmt.setString(5, bean.getType());
-	    stmt.setString(6, bean.getPhoto());
+	    stmt.setString(1,XssUtils.clearXss(bean.getFirstName()));
+	    stmt.setString(2, XssUtils.clearXss(bean.getLastName()));
+	    stmt.setString(3, XssUtils.clearXss( bean.getUsername()));
+	    stmt.setString(4, XssUtils.clearXss(bean.getPassword()));
+	    stmt.setString(5, XssUtils.clearXss(bean.getType()));
+	    stmt.setString(6, XssUtils.clearXss(bean.getPhoto()));
+	    
 	    stmt.executeUpdate();	    
 	    
 	}
@@ -72,12 +78,12 @@ public static UserBean get_user_data(String user_email)
 		    rs = stmt.executeQuery();	
 		    while ( rs.next() )
 		    {
-		    	bean.setFirstName(rs.getString("FIRST_NAME"));
-		    	bean.setLastName(rs.getString("LAST_NAME"));
-		    	bean.setUserName(rs.getString("EMAIL"));
-		    	bean.setPhone(rs.getString("PHONE"));
-		    	bean.setAddess(rs.getString("ADDRESS"));
-		    	bean.setPhoto(rs.getString("PHOTO"));
+		    	bean.setFirstName(XssUtils.clearXss(rs.getString("FIRST_NAME")) );
+		    	bean.setLastName(XssUtils.clearXss(rs.getString("LAST_NAME")));
+		    	bean.setUserName(XssUtils.clearXss(rs.getString("EMAIL"))) ;
+		    	bean.setPhone(XssUtils.clearXss(rs.getString("PHONE")));
+		    	bean.setAddess(XssUtils.clearXss(rs.getString("ADDRESS")));
+		    	bean.setPhoto(XssUtils.clearXss(rs.getString("PHOTO")));
 		    }
 		    if (currentCon != null) {
 		        try {
@@ -145,12 +151,12 @@ public static boolean update_user_data(UserBean bean)
 		    //clear sql injection threat
 
 				stmt= currentCon.prepareStatement("UPDATE user_auth SET FIRST_NAME = ?, LAST_NAME = ?, PHONE = ?,ADDRESS = ?,PHOTO = ? WHERE EMAIL = ?");
-				stmt.setString(1, bean.getFirstName());
-				stmt.setString(2, bean.getLastName());
-				stmt.setString(3, bean.getPhone());
-				stmt.setString(4, bean.getAddress());
-				stmt.setString(5, bean.getPhoto());
-				stmt.setString(6, bean.getUsername());
+				stmt.setString(1, XssUtils.clearXss(bean.getFirstName())  );
+				stmt.setString(2, XssUtils.clearXss(bean.getLastName())  );
+				stmt.setString(3, XssUtils.clearXss(bean.getPhone()) );
+				stmt.setString(4, XssUtils.clearXss(bean.getAddress()) );
+				stmt.setString(5, XssUtils.clearXss(bean.getPhoto()) );
+				stmt.setString(6, XssUtils.clearXss(bean.getUsername()) );
 				System.out.println(bean.getUsername());
 				System.out.println(bean.getFirstName());
 				stmt.executeUpdate();	
@@ -179,9 +185,7 @@ public static UserBean login(UserBean bean) {
       currentCon = ConnectionManager.getConnection();
       
       //clear sql injection threat
-      System.out.println(bean.getUsername() + bean.getPassword());
       stmt= currentCon.prepareStatement("SELECT * FROM user_auth WHERE EMAIL= ? AND PASSWORD = ?");
-      System.out.println(bean.getUsername() + bean.getPassword());
       stmt.setString(1, bean.getUsername());
       stmt.setString(2, bean.getPassword());
       

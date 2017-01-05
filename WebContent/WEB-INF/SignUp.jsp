@@ -53,7 +53,7 @@
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-									<input type="email" class="form-control" style="width:200px" name="email" id="email"  placeholder="Enter your Email"/>
+									<input type="email" class="form-control" style="width:200px" name="email" id="inputEmail" placeholder="Email address" required autofocus/>
 								</div>
 							</div>
 						</div>
@@ -65,7 +65,7 @@
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-									<input type="password" class="form-control" style="width:200px" name="password" id="password"  placeholder="Enter your Password"/>
+									<input type="password" class="form-control" style="width:200px" name="password" id="inputPassword"  required placeholder="Enter your Password"/>
 								</div>
 							</div>
 						</div>

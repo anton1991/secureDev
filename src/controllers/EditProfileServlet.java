@@ -119,10 +119,10 @@ public class EditProfileServlet extends HttpServlet {
 	        	new_user.setPhoto(request.getParameter("old_photo"));
 	        }
 
-	 		new_user.setFirstName(XssUtils.clearXss(request.getParameter("first_name")));
-	 		new_user.setLastName(XssUtils.clearXss(request.getParameter("last_name")));
-	 		new_user.setAddess(XssUtils.clearXss(request.getParameter("add")));
-	 		new_user.setPhone(XssUtils.clearXss(request.getParameter("phone")));
+	 		new_user.setFirstName(request.getParameter("first_name"));
+	 		new_user.setLastName(request.getParameter("last_name"));
+	 		new_user.setAddess(request.getParameter("add"));
+	 		new_user.setPhone(request.getParameter("phone"));
 	 	    new_user.setUserName(session.getAttribute("user_name").toString());
 	 	    
 	 	    UserDAO.update_user_data(new_user);

@@ -102,6 +102,13 @@ public class SignInController extends HttpServlet {
 	    new_user.setPassword(getMD5(request.getParameter("password") + request.getParameter("email")));
 	     
 	    new_user.setType("guest");
+	    //check if email and pass are not empty (its ugly but we dont have much time)
+	    if (!new_user.getPassword().isEmpty() || !new_user.getUsername().isEmpty())
+	    {
+	    	System.out.println("empty user" );
+	    	request.getRequestDispatcher("/WEB-INF/SignUp.jsp").forward(request, response);
+	    }
+	    
    	 	boolean status = UserDAO.sign_up(new_user);
    	 	if (status)
    	 	{

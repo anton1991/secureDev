@@ -1,7 +1,6 @@
 package controllers;  
   
 import java.io.IOException;  
-import java.io.PrintWriter;  
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;  
@@ -53,15 +52,15 @@ public class CalendarServlet extends HttpServlet {
 	        	user_data = UserDAO.get_user_data(session.getAttribute("user_name").toString());
 	        	request.setAttribute("profile", user_data);
 				new_apoint.setOWNER(session.getAttribute("user_name").toString());
-				new_apoint.setFirstName(XssUtils.clearXss(request.getParameter("first_name")));
-				new_apoint.setLastName(XssUtils.clearXss(request.getParameter("last_name")));
-				new_apoint.setPhone(XssUtils.clearXss(request.getParameter("phone")));
-				new_apoint.setEmail(XssUtils.clearXss(request.getParameter("email")));
-				new_apoint.setRegarding(XssUtils.clearXss(request.getParameter("regarding")));
-				new_apoint.setMonth(XssUtils.clearXss(request.getParameter("month")));
-				new_apoint.setDay(XssUtils.clearXss(request.getParameter("day")));
-				new_apoint.setTime(XssUtils.clearXss(request.getParameter("time")));
-				new_apoint.setMessage(XssUtils.clearXss(request.getParameter("message")));
+				new_apoint.setFirstName(request.getParameter("first_name"));
+				new_apoint.setLastName(request.getParameter("last_name"));
+				new_apoint.setPhone(request.getParameter("phone"));
+				new_apoint.setEmail(request.getParameter("email"));
+				new_apoint.setRegarding(request.getParameter("regarding"));
+				new_apoint.setMonth(request.getParameter("month"));
+				new_apoint.setDay(request.getParameter("day"));
+				new_apoint.setTime(request.getParameter("time"));
+				new_apoint.setMessage(request.getParameter("message"));
 				System.out.println(new_apoint.getFirstName()+"---"+new_apoint.getOwner()+"---"+new_apoint.getEmail());
 				System.out.println(user_data.getUsername());
 				boolean res = AppointmentDAO.set_appointment(new_apoint, user_data);

@@ -91,7 +91,7 @@ public class LoginServlet extends HttpServlet {
 				userCookie.setMaxAge(0);
 				response.addCookie(userCookie);
 				request.setAttribute("msg", "fuck you");
-				request.getRequestDispatcher("LogIn").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/LogInPage.jsp").forward(request, response);
 			}
 		}
 
