@@ -91,11 +91,10 @@
   <session-config>
     <cookie-config>
       <http-only>true</http-only>
-      <secure>true</secure>
     </cookie-config>
   </session-config>
   <context-param>
     <param-name>user_photos</param-name>
-    <param-value>/Users/antong/Documents/workspace/secureDev/WebContent/Images</param-value>
+    <param-value>/Users/dorlaker/git/secureDev/WebContent/Images</param-value>
   </context-param>
 </web-app>
