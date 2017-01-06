@@ -43,6 +43,7 @@ public class ProfileServlet extends HttpServlet {
 	    	 
 	    	user_data = UserDAO.get_user_data(session.getAttribute("user_name").toString());
 	    	request.setAttribute("user_data", user_data);
+	    	request.setAttribute("user_loged_in", session.getAttribute("user_name"));
 	    	request.getRequestDispatcher("/WEB-INF/Profile.jsp").include(request, response); 
 	     }
 	     else 
